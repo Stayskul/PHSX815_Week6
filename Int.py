@@ -4,6 +4,7 @@ class Integrate:
     #class for numerical integration methods 
     #http://specminor.org/2017/01/05/numerical-integration-python.html
     #https://stackoverflow.com/questions/27115917/gauss-legendre-quadrature-in-python
+    #https://www.geeksforgeeks.org/monte-carlo-integration-in-python/
     
 # approximates integral using rectangle method
     def rectint(f,a,b,rectangles):
@@ -71,3 +72,24 @@ class Integrate:
         cumulative_area=sum(area)
 
         return cumulative_area
+ 
+#Appromatimates the integral using a Monte Carlo Integration method
+    def MCint(f, a, b, N):
+
+        a=float(a)
+        b=float(b)   
+        X=(b-a)/float(N)
+
+        ar=np.zeros(N)
+
+        for i in range(N): 
+            ar[i]=random.uniform(a,b)
+
+        int = 0.0
+
+        for i in ar:
+            int += f(i)
+
+        area = X*int
+
+        return area
